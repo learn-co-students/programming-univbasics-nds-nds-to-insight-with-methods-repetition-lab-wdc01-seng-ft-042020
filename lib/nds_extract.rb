@@ -10,34 +10,39 @@ def directors_totals(source)
     director_index += 1
   end
   result
-end
+end #returns a hash. {"Spielberg" => gross director("Spielberg), . . . }
 
 def gross_for_director(d)
   total = 0
   index = 0
-
   while index < d[:movies].length do
     total += d[:movies][index][:worldwide_gross]
     index += 1
   end
-
   total
-end
+end #returns an Integer of director's total worldwide_gross
 
 def list_of_directors(source)
-  # Write this implementation
-end
+  #source is an array of hashes
+  result = []
+  source_index = 0
+  while source_index < source.length do
+    result.push(source[source_index][:name])
+    source_index += 1
+  end
+  return result 
+end #returns an array of strings ["Spielberg", "Ford"]
 
 def total_gross(source)
-  # Write this implementation
-  #
-  # Should use methods:
-  # 1. directors_totals: returns a Hash of { dir_name => gross }
-  # 2. list_of_directors: names provides an Array of directors names (use
-  #
-  # Visit each key (i.e. director name), look up the value in the hash
-  # returned by directors_totals, and add it to a running total. When done,
-  # return the total
+  #source is array of hashes
+  running_total = 0
+  dir_array = list_of_directors(source) # assigns dir_array to array of strings ["Spielberg", "Ford"]
+  dir_hash = directors_totals(source) # assigns dir_hash to hash of {string => total}
+  dir_ind = 0
+  while dir_ind < dir_array.length do
+    running_total += dir_hash[dir_array[dir_ind]]  
+    dir_ind += 1
+  end
+  return running_total  
 end
-
 
